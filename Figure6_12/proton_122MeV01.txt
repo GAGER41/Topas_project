@@ -56,7 +56,7 @@ d:So/Source/BeamPositionSpreadY      = 0.65 cm
 d:So/Source/BeamPositionCutoffX      = 5. cm # Half length of field size in x
 d:So/Source/BeamPositionCutoffY      = 5. cm # Half length of field size in y
 s:So/Source/BeamAngularDistribution  = "None"
-i:So/Source/NumberOfHistoriesInRun   = 1000000
+i:So/Source/NumberOfHistoriesInRun   = 10
 
 s:Ge/BeamPosition/Parent = "World"
 s:Ge/BeamPosition/Type   = "Group"
@@ -101,8 +101,8 @@ s:Sc/DoseAtPhantom/OutputFile                 = "Dose_water_phantom_122MeV"
 # ===================================================== #
 
 i:Ts/NumberOfThreads  = 0
-b:Gr/Enable           = "F" # Set to false F to run simulation without graphics
-b:Ts/PauseBeforeQuit  = "F" # Set to false F to run simulation without graphics
+b:Gr/Enable           = "T" # Set to false F to run simulation without graphics
+b:Ts/PauseBeforeQuit  = "T" # Set to false F to run simulation without graphics
 Ts/UseQt              = "F"
 s:Gr/View/Type             = "OpenGL"
 d:Gr/View/Theta            = 90 deg
