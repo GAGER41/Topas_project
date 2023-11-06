@@ -103,7 +103,7 @@ s:Sc/DoseAtPhantom/Component                  = "Phantom"
 s:Sc/DoseAtPhantom/IfOutputFileAlreadyExists  = "Increment"
 b:Sc/DoseAtPhantom/OutputToConsole            = "False"
 s:Sc/DoseAtPhantom/OutputType                 = "csv"
-s:Sc/DoseAtPhantom/OutputFile                 = "6_12_protons_230MeV_broad"
+s:Sc/DoseAtPhantom/OutputFile                 = "7_13_protons_235MeV_SOBP"
 
 # ===================================================== #
 #        Graphics and miscellaneous parameters          #
