@@ -8,11 +8,12 @@ MeV_to_joule = 1.602176565e-13 # J/MeV
 # paths = [r"",
 #          r"",
 #          r"C:\Users\gabri\Documents\Université\Maitrise\Session 1\physique_radiations\Devoir\Topas_project\Figure6_12\Dose_water_phantom_122MeV_14.csv"]
-path = r"C:\Users\gabri\Documents\Université\Maitrise\Session 1\physique_radiations\Devoir\Topas_project\Figure6_12\6_12_protons_183MeV_broad.csv"
+# path = r"C:\Users\gabri\Documents\Université\Maitrise\Session 1\physique_radiations\Devoir\Topas_project\Figure6_12\6_12_carbon_430MeV_broad.csv"
+path = r"Topas_project\Figure6_12\6_12_protons_122MeV_broad.csv"
 data = np.loadtxt(path, skiprows=9, delimiter=', ', usecols=(2, 3, 4))
 # print(data)
 field = 100 # cm2
-history = 1000000
+history = 100000
 fluence = history/field
 bin = data[:, 0]
 dose = data[:, 1]
