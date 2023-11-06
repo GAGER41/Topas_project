@@ -23,16 +23,17 @@
 # The number of bins of such geometry controls the slab thickness.
 # The half-lengths should be adjusted depending on the field size
 # and the particle type, photons or electrons.
+#
 # ==========================================================
 
 # ====================================================== #
 #                    World and physics                   #
 # ====================================================== #
 
-# 30 cm side water cube
-d:Ge/World/HLX = 15 cm
-d:Ge/World/HLY = 15 cm
-d:Ge/World/HLZ = 15 cm
+# 50 cm side water cube
+d:Ge/World/HLX = 25 cm
+d:Ge/World/HLY = 25 cm
+d:Ge/World/HLZ = 25 cm
 s:Ge/World/Material = "G4_WATER"
 
 
@@ -47,16 +48,16 @@ sv:Ph/Default/Modules = 1 "g4em-standard_opt4"
 s:So/Source/Type                     = "Beam" 
 s:So/Source/Component                = "BeamPosition"
 s:So/Source/BeamParticle             = "proton"
-d:So/Source/BeamEnergy               = 122 MeV
+d:So/Source/BeamEnergy               = 230 MeV
 u:So/Source/BeamEnergySpread         = 0
 s:So/Source/BeamPositionDistribution = "Gaussian"
 s:So/Source/BeamPositionCutoffShape  = "Ellipse"
-d:So/Source/BeamPositionSpreadX      = 0.65 cm
-d:So/Source/BeamPositionSpreadY      = 0.65 cm
+d:So/Source/BeamPositionSpreadX      = 0.5 mm
+d:So/Source/BeamPositionSpreadY      = 0.5 mm
 d:So/Source/BeamPositionCutoffX      = 5. cm # Half length of field size in x
 d:So/Source/BeamPositionCutoffY      = 5. cm # Half length of field size in y
 s:So/Source/BeamAngularDistribution  = "None"
-i:So/Source/NumberOfHistoriesInRun   = 10
+i:So/Source/NumberOfHistoriesInRun   = 1000
 
 s:Ge/BeamPosition/Parent = "World"
 s:Ge/BeamPosition/Type   = "Group"
@@ -68,7 +69,7 @@ d:Ge/BeamPosition/RotY   = 0. deg
 d:Ge/BeamPosition/RotZ   = 0. deg
 
 # ===================================================== #
-#    Scorer, slabs of 2 cm thickness                    #
+#    Scorer, slabs of 15 cm thickness                    #
 #                                                       #
 # ===================================================== #
 
@@ -76,11 +77,11 @@ s:Ge/Phantom/Type      = "TsBox"
 s:Ge/Phantom/Parent    = "World"
 d:Ge/Phantom/HLX        =  0.5 cm
 d:Ge/Phantom/HLY        =  0.5 cm
-d:Ge/Phantom/HLZ        =  1 cm
-s:Ge/Phantom/Color      =  "blue"
+d:Ge/Phantom/HLZ        =  17.5 cm
+s:Ge/Phantom/Color      =  "red"
 b:Ge/Phantom/IsParallel = "T"
-i:Ge/Phantom/ZBins      = 60
-d:Ge/Phantom/TransZ     = 14 cm
+i:Ge/Phantom/ZBins      = 350
+d:Ge/Phantom/TransZ     = 7.5 cm
 
 # Rotate Phantom so that the bin numbered 0 will be the
 # first bin hit.
@@ -94,15 +95,15 @@ s:Sc/DoseAtPhantom/Component                  = "Phantom"
 s:Sc/DoseAtPhantom/IfOutputFileAlreadyExists  = "Increment"
 b:Sc/DoseAtPhantom/OutputToConsole            = "False"
 s:Sc/DoseAtPhantom/OutputType                 = "csv"
-s:Sc/DoseAtPhantom/OutputFile                 = "Dose_water_phantom_122MeV"
+s:Sc/DoseAtPhantom/OutputFile                 = "6_12_protons_230MeV_narr"
 
 # ===================================================== #
 #        Graphics and miscellaneous parameters          #
 # ===================================================== #
 
 i:Ts/NumberOfThreads  = 0
-b:Gr/Enable           = "T" # Set to false F to run simulation without graphics
-b:Ts/PauseBeforeQuit  = "T" # Set to false F to run simulation without graphics
+b:Gr/Enable           = "F" # Set to false F to run simulation without graphics
+b:Ts/PauseBeforeQuit  = "F" # Set to false F to run simulation without graphics
 Ts/UseQt              = "F"
 s:Gr/View/Type             = "OpenGL"
 d:Gr/View/Theta            = 90 deg
