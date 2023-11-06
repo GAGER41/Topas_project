@@ -1,1 +1,78 @@
+# =========================================================                          
+# This file provides a simple setup to study the percentage 
+# depth dose curves generated inside a 30x30x30 cm3 water cube.
+#
+# The initial beam can be either photons or electrons.
+#
+# The position distribution of the beam is Flat (all initial
+# positions have the same weight, no gaussian)
+#
+# Users can easily define the field size by changing
+# the BeamPositionCutoff parameters
+#
+# The beam is set to parallel by setting the angular
+# distribution to None
+#
+# The beam is monoenergetic by setting the energy spread
+# to 0
+#
+# The beam starts at the phantom Z-surface by indicating
+# the parameter BeamPosition/TransZ = Ge/World/HLZ
+#
+# The scorer is a box that is binned in the Z direction.
+# The number of bins of such geometry controls the slab thickness.
+# The half-lengths should be adjusted depending on the field size
+# and the particle type, photons or electrons.
+#
+# ==========================================================
+
+# ====================================================== #
+#                    World and physics                   #
+# ====================================================== #
+
+# 50 cm side water cube
+d:Ge/World/HLX = 25 cm
+d:Ge/World/HLY = 25 cm
+d:Ge/World/HLZ = 25 cm
+s:Ge/World/Material = "G4_WATER"
+
+# Best physics list for medical physics applications
+# according to the G4-Med benchmarking group 10.1002/mp.14226
+sv:Ph/Default/Modules = 1 "g4em-standard_opt4"
+
+# ====================================================== #
+#            Source component and its position           #
+# ====================================================== #
+
+#*******Beam Definition***********************************
+s:So/Beam/Type                = "Beam"
+s:So/Beam/Component            = "BeamPosition"
+s:So/Beam/BeamParticle            = "proton"
+d:So/Beam/BeamEnergy             = Tf/BeamEnergy/Values
+s:Tf/BeamEnergy/Function         = "Step"
+dv:Tf/BeamEnergy/Times           = 24
+8.5 25.7 43.5 61.8 80.7 100.2 120.5 141.5 163.3 186.1 210.0 235.0 261.4 289.5 319.4 351.5 386.4 424.8 467.7 517.0 575.9 651.9 772.3 1000.0 ms
+dv:Tf/BeamEnergy/Values         = 24
+225.8 226.2 226.6 227.0 227.4 227.8 228.2 228.6 229.0 229.4 229.8 230.2 230.6 231.0 231.4 231.8 232.2 232.6 233.0 233.4 233.8 234.2 234.6 235.0 MeV
+u:So/Beam/BeamEnergySpread          = 0.
+s:So/Beam/BeamShape           = "Gaussian"
+d:So/Beam/BeamPositionSpreadX      = 0.65 cm
+d:So/Beam/BeamPositionSpreadY      = 0.65 cm
+s:So/Beam/BeamPositionCutoffShape      = "Ellipse"
+s:So/Beam/BeamPositionDistribution     = "Flat"
+s:So/Beam/BeamAngularDistribution      = "None"
+d:So/Beam/BeamPositionCutoffX      = 5. cm # Half length of field size in x
+d:So/Beam/BeamPositionCutoffY      = 5. cm # Half length of field size in y
+
+i:So/Beam/NumberOfHistoriesInRun       = 1000
+Ts/ShowHistoryCountAtInterval        = 100
+
+s:Ge/BeamPosition/Parent = "World"
+s:Ge/BeamPosition/Type   = "Group"
+d:Ge/BeamPosition/TransX = 0. cm
+d:Ge/BeamPosition/TransY = 0. cm
+d:Ge/BeamPosition/TransZ = Ge/World/HLZ cm
+d:Ge/BeamPosition/RotX   = 180. deg
+d:Ge/BeamPosition/RotY   = 0. deg
+d:Ge/BeamPosition/RotZ   = 0. deg
 
