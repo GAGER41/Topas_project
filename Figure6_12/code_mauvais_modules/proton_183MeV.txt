@@ -48,7 +48,7 @@ sv:Ph/Default/Modules = 1 "g4em-standard_opt4"
 s:So/Source/Type                     = "Beam" 
 s:So/Source/Component                = "BeamPosition"
 s:So/Source/BeamParticle             = "proton"
-d:So/Source/BeamEnergy               = 122 MeV
+d:So/Source/BeamEnergy               = 183 MeV
 u:So/Source/BeamEnergySpread         = 0
 s:So/Source/BeamPositionDistribution = "Gaussian"
 s:So/Source/BeamPositionCutoffShape  = "Ellipse"
@@ -95,7 +95,7 @@ s:Sc/DoseAtPhantom/Component                  = "Phantom"
 s:Sc/DoseAtPhantom/IfOutputFileAlreadyExists  = "Increment"
 b:Sc/DoseAtPhantom/OutputToConsole            = "False"
 s:Sc/DoseAtPhantom/OutputType                 = "csv"
-s:Sc/DoseAtPhantom/OutputFile                 = "6_12_protons_122MeV_broad"
+s:Sc/DoseAtPhantom/OutputFile                 = "6_12_protons_183MeV"
 
 # ===================================================== #
 #        Graphics and miscellaneous parameters          #

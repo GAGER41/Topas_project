@@ -47,8 +47,8 @@ sv:Ph/Default/Modules = 1 "g4em-standard_opt4"
 
 s:So/Source/Type                     = "Beam" 
 s:So/Source/Component                = "BeamPosition"
-s:So/Source/BeamParticle             = "GenericIon(6,12,6)"
-d:So/Source/BeamEnergy               = 4200 MeV		# 350 MeV/u
+s:So/Source/BeamParticle             = "proton"
+d:So/Source/BeamEnergy               = 230 MeV
 u:So/Source/BeamEnergySpread         = 0
 s:So/Source/BeamPositionDistribution = "Gaussian"
 s:So/Source/BeamPositionCutoffShape  = "Ellipse"
@@ -57,7 +57,7 @@ d:So/Source/BeamPositionSpreadY      = 6.5 mm
 d:So/Source/BeamPositionCutoffX      = 5. cm # Half length of field size in x
 d:So/Source/BeamPositionCutoffY      = 5. cm # Half length of field size in y
 s:So/Source/BeamAngularDistribution  = "None"
-i:So/Source/NumberOfHistoriesInRun   = 1000
+i:So/Source/NumberOfHistoriesInRun   = 1000000
 
 s:Ge/BeamPosition/Parent = "World"
 s:Ge/BeamPosition/Type   = "Group"
@@ -95,7 +95,7 @@ s:Sc/DoseAtPhantom/Component                  = "Phantom"
 s:Sc/DoseAtPhantom/IfOutputFileAlreadyExists  = "Increment"
 b:Sc/DoseAtPhantom/OutputToConsole            = "False"
 s:Sc/DoseAtPhantom/OutputType                 = "csv"
-s:Sc/DoseAtPhantom/OutputFile                 = "6_12_carbon_350MeV_broad"
+s:Sc/DoseAtPhantom/OutputFile                 = "6_12_protons_230MeV"
 
 # ===================================================== #
 #        Graphics and miscellaneous parameters          #

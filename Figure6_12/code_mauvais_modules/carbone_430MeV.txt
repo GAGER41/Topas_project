@@ -39,7 +39,8 @@ s:Ge/World/Material = "G4_WATER"
 
 # Best physics list for medical physics applications
 # according to the G4-Med benchmarking group 10.1002/mp.14226
-sv:Ph/Default/Modules = 1 "g4em-standard_opt4"
+sv:Ph/Default/Modules = 1 "g4em-standard_opt4" 
+
 
 # ====================================================== #
 #            Source component and its position           #
@@ -47,8 +48,8 @@ sv:Ph/Default/Modules = 1 "g4em-standard_opt4"
 
 s:So/Source/Type                     = "Beam" 
 s:So/Source/Component                = "BeamPosition"
-s:So/Source/BeamParticle             = "proton"
-d:So/Source/BeamEnergy               = 183 MeV
+s:So/Source/BeamParticle             = "GenericIon(6,12,6)"
+d:So/Source/BeamEnergy               = 5160 MeV     # 430 MeV/u
 u:So/Source/BeamEnergySpread         = 0
 s:So/Source/BeamPositionDistribution = "Gaussian"
 s:So/Source/BeamPositionCutoffShape  = "Ellipse"
@@ -57,7 +58,7 @@ d:So/Source/BeamPositionSpreadY      = 6.5 mm
 d:So/Source/BeamPositionCutoffX      = 5. cm # Half length of field size in x
 d:So/Source/BeamPositionCutoffY      = 5. cm # Half length of field size in y
 s:So/Source/BeamAngularDistribution  = "None"
-i:So/Source/NumberOfHistoriesInRun   = 1000000
+i:So/Source/NumberOfHistoriesInRun   = 10000
 
 s:Ge/BeamPosition/Parent = "World"
 s:Ge/BeamPosition/Type   = "Group"
@@ -69,7 +70,7 @@ d:Ge/BeamPosition/RotY   = 0. deg
 d:Ge/BeamPosition/RotZ   = 0. deg
 
 # ===================================================== #
-#    Scorer, slabs of 15 cm thickness                    #
+#    Scorer, slabs of 35 cm thickness                    #
 #                                                       #
 # ===================================================== #
 
@@ -95,7 +96,7 @@ s:Sc/DoseAtPhantom/Component                  = "Phantom"
 s:Sc/DoseAtPhantom/IfOutputFileAlreadyExists  = "Increment"
 b:Sc/DoseAtPhantom/OutputToConsole            = "False"
 s:Sc/DoseAtPhantom/OutputType                 = "csv"
-s:Sc/DoseAtPhantom/OutputFile                 = "6_12_protons_183MeV_broad"
+s:Sc/DoseAtPhantom/OutputFile                 = "6_12_carbon_430MeV"
 
 # ===================================================== #
 #        Graphics and miscellaneous parameters          #
