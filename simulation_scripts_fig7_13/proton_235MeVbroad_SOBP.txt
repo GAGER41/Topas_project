@@ -1,0 +1,114 @@
+# =========================================================                          
+#This file provides a simple setup to study the percentage 
+# depth dose curves generated inside a 50x50x50 cm3 water cube.
+#
+# The initial beam can be either photons, electrons, protons or ions (carbon for exemple).
+#
+# The position distribution of the beam is Gaussian.
+#
+# Users can easily define the field size by changing
+# the BeamPositionCutoff parameters
+#
+# The beam is set to parallel by setting the angular
+# distribution to None
+#
+# The beam is monoenergetic by setting the energy spread
+# to 0
+#
+# The beam starts at the phantom Z-surface by indicating
+# the parameter BeamPosition/TransZ = Ge/World/HLZ
+#
+# The scorer is a box that is binned in the Z direction.
+# The number of bins of such geometry controls the slab thickness.
+# The half-lengths should be adjusted depending on the field size
+# and the particle type, photons or electrons.
+# ==========================================================
+
+# ====================================================== #
+#                    World and physics                   #
+# ====================================================== #
+
+# 50 cm side water cube
+d:Ge/World/HLX = 25 cm
+d:Ge/World/HLY = 25 cm
+d:Ge/World/HLZ = 25 cm
+s:Ge/World/Material = "G4_WATER"
+
+
+# Best physics list for medical physics applications
+# according to the G4-Med benchmarking group 10.1002/mp.14226
+s:Ph/ListName = "Default"
+b:Ph/ListProcesses = "False"
+s:Ph/Default/Type = "Geant4_Modular"
+sv:Ph/Default/Modules = 2 "g4em-standard_opt4" "g4h-phy_QGSP_BIC_HP" 
+
+# ====================================================== #
+#            Source component and its position           #
+# ====================================================== #
+
+s:So/Source/Type                     = "Beam" 
+s:So/Source/Component                = "BeamPosition"
+s:So/Source/BeamParticle             = "proton"
+d:So/Source/BeamEnergy               = 230 MeV
+u:So/Source/BeamEnergySpread         = 0
+s:So/Source/BeamPositionDistribution = "Gaussian"
+s:So/Source/BeamPositionCutoffShape  = "Ellipse"
+d:So/Source/BeamPositionSpreadX      = 6.5 mm
+d:So/Source/BeamPositionSpreadY      = 6.5 mm
+d:So/Source/BeamPositionCutoffX      = 5. cm # Half length of field size in x
+d:So/Source/BeamPositionCutoffY      = 5. cm # Half length of field size in y
+s:So/Source/BeamAngularDistribution  = "None"
+i:So/Source/NumberOfHistoriesInRun   = 10000
+
+s:Ge/BeamPosition/Parent = "World"
+s:Ge/BeamPosition/Type   = "Group"
+d:Ge/BeamPosition/TransX = 0. cm
+d:Ge/BeamPosition/TransY = 0. cm
+d:Ge/BeamPosition/TransZ = Ge/World/HLZ cm
+d:Ge/BeamPosition/RotX   = 180. deg
+d:Ge/BeamPosition/RotY   = 0. deg
+d:Ge/BeamPosition/RotZ   = 0. deg
+
+# ===================================================== #
+#    Scorer, slabs of 15 cm thickness                    #
+#                                                       #
+# ===================================================== #
+
+s:Ge/Phantom/Type      = "TsBox"
+s:Ge/Phantom/Parent    = "World"
+d:Ge/Phantom/HLX        =  0.5 cm
+d:Ge/Phantom/HLY        =  0.5 cm
+d:Ge/Phantom/HLZ        =  17.5 cm
+s:Ge/Phantom/Color      =  "red"
+b:Ge/Phantom/IsParallel = "T"
+i:Ge/Phantom/ZBins      = 350
+d:Ge/Phantom/TransZ     = 7.5 cm
+
+# Rotate Phantom so that the bin numbered 0 will be the
+# first bin hit.
+# Alternately, one could have adjusted the demo source
+# so that the beam pointed in from the other side of the world.
+d:Ge/Phantom/RotX = 180. deg
+
+s:Sc/DoseAtPhantom/Quantity                   = "DoseToMedium"
+sv:Sc/DoseAtPhantom/Report                    = 2 "sum" "Standard_Deviation"
+s:Sc/DoseAtPhantom/Component                  = "Phantom"
+s:Sc/DoseAtPhantom/IfOutputFileAlreadyExists  = "Increment"
+b:Sc/DoseAtPhantom/OutputToConsole            = "False"
+s:Sc/DoseAtPhantom/OutputType                 = "csv"
+s:Sc/DoseAtPhantom/OutputFile                 = "7_13_protons_235MeV_SOBP"
+
+# ===================================================== #
+#        Graphics and miscellaneous parameters          #
+# ===================================================== #
+
+i:Ts/NumberOfThreads  = 0
+b:Gr/Enable           = "F" # Set to false F to run simulation without graphics
+b:Ts/PauseBeforeQuit  = "F" # Set to false F to run simulation without graphics
+Ts/UseQt              = "F"
+s:Gr/View/Type             = "OpenGL"
+d:Gr/View/Theta            = 90 deg
+d:Gr/View/PerspectiveAngle = 50 deg
+b:Gr/View/IncludeAxes      = "True"
+d:Gr/View/AxesSize         = 15 cm
+u:Gr/View/Zoom             = 1.

@@ -1,0 +1,127 @@
+# =========================================================                          
+#This file provides a simple setup to study the percentage 
+# depth dose curves generated inside a 50x50x50 cm3 water cube.
+#
+# The initial beam can be either photons, electrons, protons or ions (carbon for exemple).
+#
+# The position distribution of the beam is Gaussian.
+#
+# Users can easily define the field size by changing
+# the BeamPositionCutoff parameters
+#
+# The beam is set to parallel by setting the angular
+# distribution to None
+#
+# The beam is monoenergetic by setting the energy spread
+# to 0
+#
+# The beam starts at the phantom Z-surface by indicating
+# the parameter BeamPosition/TransZ = Ge/World/HLZ
+#
+# The scorer is a box that is binned in the Z direction.
+# The number of bins of such geometry controls the slab thickness.
+# The half-lengths should be adjusted depending on the field size
+# and the particle type, photons or electrons.
+# ==========================================================
+
+# ====================================================== #
+#                    World and physics                   #
+# ====================================================== #
+
+# Water cube larger than the Bragg peak position, 
+# let's assume at least 40 cm to fully capture the peak and fall-off
+d:Ge/World/HLX = 25 cm
+d:Ge/World/HLY = 25 cm
+d:Ge/World/HLZ = 25 cm
+s:Ge/World/Material = "G4_WATER"
+
+
+s:Tf/BeamEnergy/Function = "Step"
+dv:Tf/BeamEnergy/Times = 159
+1.1 3.4 5.7 8.1 10.4 12.7 15.1 17.4 19.8 22.2 24.5 26.9 29.3 31.8 34.2 36.6 39.1 41.5 44.0 46.5 49.0 51.5 54.0 56.5 59.1 61.6 64.2 66.8 69.4 72.0 74.6 77.2 79.9 82.5 85.2 87.9 90.6 93.3 96.1 98.8 101.6 104.3 107.1 109.9 112.8 115.6 118.5 121.3 124.2 127.1 130.0 133.0 135.9 138.9 141.9 144.9 148.0 151.0 154.1 157.2 160.3 163.4 166.6 169.8 173.0 176.2 179.4 182.7 186.0 189.3 192.6 196.0 199.4 202.8 206.2 209.7 213.2 216.7 220.3 223.9 227.5 231.1 234.8 238.5 242.2 246.0 249.8 253.6 257.5 261.4 265.4 269.3 273.4 277.4 281.5 285.7 289.9 294.1 298.4 302.7 307.1 311.5 316.0 320.5 325.1 329.8 334.5 339.2 344.1 348.9 353.9 358.9 364.0 369.2 374.4 379.8 385.2 390.7 396.2 401.9 407.7 413.6 419.5 425.6 431.9 438.2 444.7 451.3 458.0 464.9 472.0 479.2 486.7 494.3 502.1 510.2 518.5 527.0 535.9 545.1 554.6 564.5 574.8 585.5 596.8 608.7 621.3 634.7 649.0 664.4 681.2 699.7 720.6 744.7 773.8 811.7 873.0 1000.0 1150 ms
+dv:Tf/BeamEnergy/Values = 159
+163.5 163.8 164.0 164.3 164.5 164.8 165.0 165.3 165.5 165.8 166.0 166.3 166.5 166.8 167.0 167.2 167.5 167.7 168.0 168.2 168.5 168.7 169.0 169.2 169.5 169.7 170.0 170.2 170.4 170.7 170.9 171.2 171.4 171.7 171.9 172.1 172.4 172.6 172.9 173.1 173.4 173.6 173.8 174.1 174.3 174.6 174.8 175.0 175.3 175.5 175.8 176.0 176.2 176.5 176.7 176.9 177.2 177.4 177.7 177.9 178.1 178.4 178.6 178.8 179.1 179.3 179.5 179.8 180.0 180.2 180.5 180.7 180.9 181.2 181.4 181.6 181.9 182.1 182.3 182.6 182.8 183.0 183.3 183.5 183.7 184.0 184.2 184.4 184.6 184.9 185.1 185.3 185.6 185.8 186.0 186.2 186.5 186.7 186.9 187.2 187.4 187.6 187.8 188.1 188.3 188.5 188.7 189.0 189.2 189.4 189.6 189.9 190.1 190.3 190.5 190.8 191.0 191.2 191.4 191.7 191.9 192.1 192.3 192.6 192.8 193.0 193.2 193.4 193.7 193.9 194.1 194.3 194.5 194.8 195.0 195.2 195.4 195.6 195.9 196.1 196.3 196.5 196.7 197.0 197.2 197.4 197.6 197.8 198.0 198.3 198.5 198.7 198.9 199.1 199.4 199.6 199.8 200.0 235.0 MeV
+
+
+
+
+#*******Beam Definition***********************************
+
+s:So/Beam1/Type                      = "Beam"
+s:So/Beam1/Component                 = "BeamPosition"
+s:So/Beam1/BeamParticle              = "proton"
+d:So/Beam1/BeamEnergy                = Tf/BeamEnergy/Value MeV
+u:So/Beam1/BeamEnergySpread          = 0.
+s:So/Beam1/BeamPositionDistribution  = "Gaussian"
+s:So/Beam1/BeamPositionCutoffShape   = "Ellipse"
+d:So/Beam1/BeamPositionSpreadX       = 0.65 cm
+d:So/Beam1/BeamPositionSpreadY      =  0.65 cm
+d:So/Beam1/BeamPositionCutoffX      = 5. cm
+d:So/Beam1/BeamPositionCutoffY      = 5. cm
+
+
+s:So/Beam1/BeamAngularDistribution = "None"
+i:So/Beam1/NumberOfHistoriesInRun = 10000
+
+s:Ge/BeamPosition/Parent="World"
+s:Ge/BeamPosition/Type="Group"
+d:Ge/BeamPosition/TransX=0. m
+d:Ge/BeamPosition/TransY=0. m
+d:Ge/BeamPosition/TransZ= 14.3 cm
+d:Ge/BeamPosition/RotX= 0. deg
+d:Ge/BeamPosition/RotY= 180. deg
+d:Ge/BeamPosition/RotZ= 0. deg
+
+
+
+#**********Physics*******************************
+s:Ph/ListName = "Default"
+b:Ph/ListProcesses = "False" 
+s:Ph/Default/Type= "Geant4_Modular"
+sv:Ph/Default/Modules = 6 "g4em-standard_opt4" "g4h-phy_QGSP_BIC_HP" "g4decay" "g4ion-binarycascade" "g4h-elastic_HP" "g4stopping"
+#**********************************************************************************************************************************
+
+
+# ===================================================== #
+#     Scorer, slabs of 2 mm to 5 mm thickness           #
+#                                                       #
+# ===================================================== #
+
+s:Ge/Phantom/Type      = "TsBox"
+s:Ge/Phantom/Parent    = "World"
+d:Ge/Phantom/HLX        =  0.5 cm
+d:Ge/Phantom/HLY        =  0.5 cm
+d:Ge/Phantom/HLZ        =  17.5 cm # Half of the total depth of interest
+s:Ge/Phantom/Color      =  "red"
+b:Ge/Phantom/IsParallel = "T"
+i:Ge/Phantom/ZBins     = 350 # Number of 2 mm bins to cover up to the Bragg peak
+d:Ge/Phantom/TransZ    = 7.5 cm # Position to start at 5 cm from the beginning of the world volume, remains the same
+
+# Rotate Phantom so that the bin numbered 0 will be the
+# first bin hit.
+# Alternately, one could have adjusted the demo source
+# so that the beam pointed in from the other side of the world.
+d:Ge/Phantom/RotX = 180. deg
+
+s:Sc/DoseAtPhantom/Quantity                   = "DoseToMedium"
+sv:Sc/DoseAtPhantom/Report                    = 2 "sum" "Standard_Deviation"
+s:Sc/DoseAtPhantom/Component                  = "Phantom"
+s:Sc/DoseAtPhantom/IfOutputFileAlreadyExists  = "Increment"
+b:Sc/DoseAtPhantom/OutputToConsole            = "False"
+s:Sc/DoseAtPhantom/OutputType                 = "csv"
+s:Sc/DoseAtPhantom/OutputFile                 = "SOBP"
+
+# ===================================================== #
+#        Graphics and miscellaneous parameters          #
+# ===================================================== #
+
+i:Ts/NumberOfThreads  = 0
+b:Gr/Enable           = "F" # Set to false F to run simulation without graphics
+b:Ts/PauseBeforeQuit  = "F" # Set to false F to run simulation without graphics
+Ts/UseQt              = "F"
+s:Gr/View/Type             = "OpenGL"
+d:Gr/View/Theta            = 90 deg
+d:Gr/View/PerspectiveAngle = 50 deg
+b:Gr/View/IncludeAxes      = "True"
+d:Gr/View/AxesSize         = 20 cm
+u:Gr/View/Zoom             = 1.
